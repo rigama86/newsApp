@@ -1,0 +1,61 @@
+<div>
+    <hr>
+    <h2>Configuración</h2>
+    <div>
+      <h5>Selecciona por lo menos una categoría máximo cinco para continuar</h5>
+    </div>
+    <div class="d-flex flex-row justify-content-around">
+      <div *ngFor="let category of categories">
+        <div class="d-flex category rounded border border-success " (click)="selectionCategory(category)" ><h6 class="mb-2 text-center"> {{category.view}} </h6></div>
+      </div>
+    </div>
+    <div class="mt-4 d-flex justify-content-start" *ngIf="categoriesSelected.length>0">
+      <h4> Mi selección:</h4>
+      <span class="rounded border border-primary category-selection" *ngFor="let selection of categoriesSelected" > {{selection.view }}</span>
+    </div>
+  </div>
+  <div class="mt-4">
+    <h5>Ingresa el número de segundos que deseas para actualizar las noticias:</h5>
+    <input [(ngModel)]="numberSeconds" type="number">
+    <!-- <label *ngIf="numberSeconds>60">({{(numberSeconds/60 | number:'1.0-0')}} > (numberSeconds/60)) minutos {{numberSeconds%60}} segundos </label> -->
+    <label class="p-2" *ngIf="numberSeconds>59 && numberSeconds > 0">{{ getFloor( numberSeconds/60 ) }} min </label>
+    <label *ngIf="numberSeconds>59 && numberSeconds%60 != 0 " >{{ numberSeconds%60 }} seg</label>
+    <label class="p-2" *ngIf="numberSeconds<60 && numberSeconds > 0">{{numberSeconds}} segundos</label>
+
+    <h5 class="mt-4">Selecciona una fuente para tus noticias: </h5>
+    <div class="d-flex  mt-4 justify-content-around">
+      <button class="btn btn-primary font-arial" (click)="setFont('arial')"> Arial </button>
+      <button class="btn btn-primary font-roboto" (click)="setFont('roboto')"> Roboto </button>
+      <button class="btn btn-primary font-oswald" (click)="setFont('oswald')"> Oswald </button>
+      <button class="btn btn-primary font-flower" (click)="setFont('flower')"> Flower </button>
+      <button class="btn btn-primary font-satisfy" (click)="setFont('satisfy')"> Satisfy </button>
+      <button class="btn btn-primary font-staatliches" (click)="setFont('staatliches')"> Staatliches </button>
+      <button class="btn btn-primary font-orbitron" (click)="setFont('orbitron')"> Orbitron </button>
+      <button class="btn btn-primary font-merienda" (click)="setFont('merienda')"> Merienda </button>
+      <button class="btn btn-primary font-creepster" (click)="setFont('creepster')"> Creepster </button>
+      <button class="btn btn-primary font-bungee" (click)="setFont('bungee')"> Bungee </button>
+    </div>
+  </div>
+  <br>
+  <div class="mt-2 p-2 rounded border border-success">
+    <p [ngClass]="styleFont">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae aliquam non natus aut id sint ea? Natus 
+      tempore hic reprehenderit temporibus minima nisi, quia, magnam omnis, officiis molestiae earum.
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae aliquam non natus aut id sint ea? Natus 
+      tempore hic reprehenderit temporibus minima nisi, quia, magnam omnis, officiis molestiae earum.
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae aliquam non natus aut id sint ea? Natus 
+      tempore hic reprehenderit temporibus minima nisi, quia, magnam omnis, officiis molestiae earum.
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae aliquam non natus aut id sint ea? Natus 
+      tempore hic reprehenderit temporibus minima nisi, quia, magnam omnis, officiis molestiae earum.
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae aliquam non natus aut id sint ea? Natus 
+      tempore hic reprehenderit temporibus minima nisi, quia, magnam omnis, officiis molestiae earum.
+
+    </p>
+  </div>
+  <hr>
+  <button class="mt-4 btn btn-primary" 
+    [disabled]="!(categoriesSelected.length>0) ? 'disabled': null"   routerLink="/news" (click)="saveConfig()"> Continuar </button>

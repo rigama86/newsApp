@@ -1,0 +1,17 @@
+<nav class="nav" [ngClass]="fontStyle">
+    <a *ngFor="let category of categories[0]" class="nav-link" (click)="showCategory(category.api)"> {{category.view}} </a>
+</nav>
+
+  <div class="container-fluid" [ngClass]="fontStyle">
+    <div class="row">
+            <div *ngFor="let article of articles" class="card col-12 mt-4 ml-4" style="width: 18rem;">
+                <img  *ngIf="article.urlToImage" [src]="article.urlToImage" class="card-img-top mt-4" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"> {{article.title}}</h5>
+                  <hr>
+                  <h6> Published: {{article.publishedAt | date: 'shortDate' }}</h6>
+                  <p class="card-text"> {{article.content}}</p>
+                </div>
+              </div>
+    </div>
+  </div>
